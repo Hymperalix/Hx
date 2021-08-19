@@ -1,0 +1,37 @@
+{
+  "name": "Hx",
+  "version": "1.0",
+  "description": "Jack of all trades, master of none.",
+  "icons": {
+    "16": "images/logo16.png",
+    "32": "images/logo32.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
+  },
+  "browser_action": {
+	"default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "ext/js/jquery-3.5.1.min.js",
+        "ext/js/axios.min.js",
+        "ext/js/toastr.min.js",
+        "content-script.js"
+      ],
+      "css": [
+        "ext/css/bulma-modal.css",
+        "ext/css/toastr.min.css",
+        "content-script.css"
+      ]
+    }
+  ],
+  "permissions": ["tabs"],
+  "manifest_version": 2
+}
