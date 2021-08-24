@@ -1,0 +1,32 @@
+.__Hx__loading-body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.__Hx__loading-ring {
+  display: inline-block;
+  width: 160px;
+  height: 160px;
+}
+.__Hx__loading-ring:after {
+  content: " ";
+  display: block;
+  width: 140px;
+  height: 140px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #000 transparent #000 transparent;
+  animation: __Hx__loading-ring 1.2s linear infinite;
+}
+@keyframes __Hx__loading-ring {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

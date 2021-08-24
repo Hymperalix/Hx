@@ -1,4 +1,4 @@
-var outlook = /^https?:\/\/outlook\.live\.com\/mail\/0\/inbox/
+var outlook = /^https?:\/\/outlook\.live\.com\/mail\/0/
 var twitch = /^https?:\/\/www\.twitch\.tv\/(?!videos)/
 //var rxLookfor_list = /^https?:\/\/agirsupport\.freshdesk\.com\/a\/tickets\/filters\/.+/
 

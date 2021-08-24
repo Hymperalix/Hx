@@ -1,0 +1,6 @@
+.__Hx-outlook__loading-body {
+  background-color: black !important;
+}
+.__Hx-outlook__loading-ring:after {
+  border-color: #0078d4 transparent #0078d4 transparent !important;
+}
