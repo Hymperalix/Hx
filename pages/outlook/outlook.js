@@ -140,7 +140,7 @@ function loadOutlookUnreadItems () {
   });
   
   $('.__Hx-outlook__unread-list-item').on("contextmenu",function(){ return false; });
-  $('.__Hx-outlook__unread-counter').html((unread_total > 0 ? unread_total : ''))
+  $('.__Hx-outlook__unread-counter').html(unread_total)
 }
 
 function getOutlookItemPath (el) {
