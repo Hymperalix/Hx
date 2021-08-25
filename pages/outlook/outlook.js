@@ -144,12 +144,12 @@ function loadOutlookUnreadItems () {
 }
 
 function getOutlookItemPath (el) {
-  var title = '>'
+  var title = ''
   var aria_level = parseInt(el.attr('aria-level'))
   var prev_el = el.parent().prev().children().first()  
   while (aria_level > 2) {
     if (parseInt(prev_el.attr('aria-level')) < aria_level) {
-      title = prev_el.attr('title') + '>' + title
+      title = prev_el.attr('title') + ' > ' + title
       aria_level--
     } else {
       prev_el = prev_el.parent().prev().children().first()
