@@ -4,9 +4,7 @@
 var outlook_var = {
   regex_check: /^https?:\/\/outlook\.live\.com\/mail\/0/,
   icon: { Inbox: '', Blocked: '', Edit: '', Send: '', Clock: '', Delete: '', Archive: '', QuickNote: '', FabricFolder: '', ChevronDownMed: '', ChevronRightMed: '' },
-  load: undefined,
-  hide_ads: undefined,
-  update_unread: undefined,
+  load: undefined, hide_ads: undefined, update_unread: undefined,
   unread_visible: true
 }
     
@@ -66,16 +64,16 @@ function loadOutlook () { console.log('[loadOutlook]')
     outlook_var.load = setInterval(function () {
       if ($('._24FpkalvW30l66zFUdkI8G').length > 0) {
         clearInterval(outlook_var.load)
-        loadOutlookUnreadBody('[FIRST]')
+        loadOutlookUnreadBody()
       }
     }, 200)
   } else {
-    loadOutlookUnreadBody('[SECOND]')
+    loadOutlookUnreadBody()
   }
 
   clearInterval(outlook_var.update_unread)
   outlook_var.update_unread = setInterval(function () {
-    loadOutlookUnreadBody('[TIMED]')
+    loadOutlookUnreadBody()
   }, 2000)
 }
 
@@ -89,7 +87,7 @@ function hideOutlookADs () {
   }, 200)
 }
 
-function loadOutlookUnreadBody (type) {
+function loadOutlookUnreadBody () {
   console.log('[(Outlook) Load Unread Body]')
   $('.__Hx__loading-body').show()
 
