@@ -93,7 +93,7 @@ function loadOutlookUnreadBody () {
 
   $('.__Hx-outlook__unread').remove()
   $('._1PkXPyxM3Hhk5H6YNvwMa1.tZzTXpTvwdvH3pIUj1Bf2').first().parent().before(outlook_el.unread.body)
-  if(outlook_var.unread_visible) { $('.__Hx-outlook__unread-list').show() } else { $('.__Hx-outlook__unread-list').hide() }
+  if (outlook_var.unread_visible) { $('.__Hx-outlook__unread-list').show() } else { $('.__Hx-outlook__unread-list').hide() }
   $('.__Hx-outlook__unread-title').attr('aria-expanded', (outlook_var.unread_visible).toString())
   $('.__Hx-outlook__unread-title button span i').attr('data-icon-name', outlook_var.unread_visible ? 'ChevronDownMed' : 'ChevronRightMed').html(outlook_var.unread_visible ? outlook_var.icon['ChevronDownMed'] : outlook_var.icon['ChevronRightMed'])
 
