@@ -34,9 +34,9 @@ var outlook_el = {
     `.trim().replace(/\n/g, ' '),
     item: `
     <div draggable="true">
-      <div class="_2f5JzhIau1fYVnCdnF6jed tZzTXpTvwdvH3pIUj1Bf2 __Hx-outlook__unread-list-item UNREAD_CLASS" data-is-focusable="true" title="UNREAD_TITLE" path="UNREAD_PATH" role="treeitem" aria-selected="false" aria-level="2" tabindex="-1" style="padding-left: 0px; padding-right: 28px;">
+      <div class="_2f5JzhIau1fYVnCdnF6jed tZzTXpTvwdvH3pIUj1Bf2 __Hx-outlook__unread-list-item UNREAD_CLASS" data-is-focusable="true" title="UNREAD_TITLE_ATTR" path="UNREAD_PATH" role="treeitem" aria-selected="false" aria-level="2" tabindex="-1" style="padding-left: 0px; padding-right: 28px;">
         <i data-icon-name="UNREAD_ICON_N" aria-hidden="true" class="_3xjtFZiBm1DrWK64r3hZWK _2D6wm1spPIPn1G8mum7M8h root-62">UNREAD_ICON_I</i>
-        <span class="_3fLh9Wjn6GR68OwcUckdM0 tZzTXpTvwdvH3pIUj1Bf2 _1rX29KCSBR1YStlzdbNbZ2">UNREAD_TITLE</span>
+        <span class="_3fLh9Wjn6GR68OwcUckdM0 tZzTXpTvwdvH3pIUj1Bf2 _1rX29KCSBR1YStlzdbNbZ2">UNREAD_TITLE_SPAN</span>
         <span class="_3rASdLVQxHgpaejCMPDNFO">
           <span class="_270bLwFzcvsBtW0L5wgZCz _2dyDdCD431x294iM624xHn _3UWhBRVAO2ks8fdt9JhiHS">
             <span class="_3UWhBRVAO2ks8fdt9JhiHS">UNREAD_TOTAL</span>
@@ -123,7 +123,8 @@ function loadOutlookUnreadItems () {
     let el_path = getOutlookItemPath($($(el).parent()[0])) + el_title
 
     unread_item = outlook_el.unread.item
-    .replace(/UNREAD_TITLE/g, el_title)
+    .replace(/UNREAD_TITLE_SPAN/g, el_title)
+    .replace(/UNREAD_TITLE_ATTR/g, el_path)
     .replace(/UNREAD_ICON_N/g, el_icon)
     .replace(/UNREAD_ICON_I/g, el_icon_i)
     .replace(/UNREAD_TOTAL/g, el_total)
