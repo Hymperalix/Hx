@@ -2,7 +2,8 @@
 //  | VARIABLES |
 //  *-----------*
 var twitch_var = {
-  regex_check: /^https?:\/\/www\.twitch\.tv\/(?!videos)/
+  regex_check: /^https?:\/\/www\.twitch\.tv\/(?!videos)/,
+  prime: undefined
 }
 
 //  *----------------*
@@ -14,6 +15,13 @@ function loadTwitch () { console.log('[loadTwitch]')
 			$('[aria-label="Claim Bonus"]').click()
 		}
 	}, 1000)
+
+  twitch_var.prime = setInterval(function () {
+    if (!!$('.top-nav__prime')) {
+      clearInterval(twitch_var.prime)
+      $('.top-nav__prime').hide()
+    }
+  }, 1000)
 }
 
 //  *---------*
