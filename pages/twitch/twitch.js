@@ -2,7 +2,8 @@
 //  | VARIABLES |
 //  *-----------*
 var twitch_var = {
-  regex_check: /^https?:\/\/www\.twitch\.tv\/(?!videos)/,
+  regex_check: /^https?:\/\/www\.twitch\.tv/,
+  // regex_check: /^https?:\/\/www\.twitch\.tv\/(?!videos)/,
   prime: undefined
 }
 
