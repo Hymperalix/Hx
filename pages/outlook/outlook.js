@@ -16,9 +16,9 @@ var outlook_el = {
     body: `
     <div class="_24FpkalvW30l66zFUdkI8G __Hx-outlook__unread" role="tree">
       <div class="_1PkXPyxM3Hhk5H6YNvwMa1 tZzTXpTvwdvH3pIUj1Bf2 _24FpkalvW30l66zFUdkI8G __Hx-outlook__unread-title" data-is-focusable="true" title="Unread" role="treeitem" aria-expanded="false" aria-level="1" aria-setsize="3" aria-posinset="1" tabindex="0" style="padding-left: 0px; padding-right: 28px;">
-        <button type="button" data-is-focusable="false" tabindex="-1" class="ms-Button ms-Button--icon _249vbXlEbh-_Zlg2_z89J3 _3Tc12ptS8HtxbTLAGzivrO root-59" role="button" aria-hidden="true">
+        <button type="button" data-is-focusable="false" tabindex="-1" class="ms-Button ms-Button--icon _249vbXlEbh-_Zlg2_z89J3 _3Tc12ptS8HtxbTLAGzivrO __Hx-outlook__unread-button" role="button" aria-hidden="true">
           <span class="ms-Button-flexContainer flexContainer-47" data-automationid="splitbuttonprimary">
-            <i data-icon-name="ChevronRightMed" aria-hidden="true" class="ms-Button-icon _3xjtFZiBm1DrWK64r3hZWK _2rLOSdFEKgs3sSzkHAkBbO tZzTXpTvwdvH3pIUj1Bf2 _2D6wm1spPIPn1G8mum7M8h flipForRtl icon-61 __Hx-outlook__unread-icon"></i>
+            <i data-icon-name="ChevronRightMed" aria-hidden="true" class="ms-Button-icon _3xjtFZiBm1DrWK64r3hZWK _2rLOSdFEKgs3sSzkHAkBbO tZzTXpTvwdvH3pIUj1Bf2 _2D6wm1spPIPn1G8mum7M8h flipForRtl __Hx-outlook__unread-icon"></i>
           </span>
         </button>
         <span class="_3fLh9Wjn6GR68OwcUckdM0 tZzTXpTvwdvH3pIUj1Bf2 _1TiMxaSHmTHs6gdl1bwBCi">Unread</span>
@@ -55,7 +55,7 @@ var outlook_el = {
     <div draggable="true">
       <div class="_2f5JzhIau1fYVnCdnF6jed tZzTXpTvwdvH3pIUj1Bf2 __Hx-outlook__unread-list-item UNREAD_CLASS" data-is-focusable="true" title="UNREAD_TITLE_ATTR" path="UNREAD_PATH" role="treeitem" aria-selected="false" aria-level="2" tabindex="-1" style="padding-left: 0px; padding-right: 28px;">
         <div class="EyQ84bEUGumKAw5-dGNKI">
-          <i data-icon-name="UNREAD_ICON_N" aria-hidden="true" class="_3xjtFZiBm1DrWK64r3hZWK tZzTXpTvwdvH3pIUj1Bf2 _3JuADJZrI8MDGlNxg_ila7 _3EcgR4Apr5qv5DWu9VcOog root-62">UNREAD_ICON_I</i>
+          <i data-icon-name="UNREAD_ICON_N" aria-hidden="true" class="_3xjtFZiBm1DrWK64r3hZWK tZzTXpTvwdvH3pIUj1Bf2 _3JuADJZrI8MDGlNxg_ila7 _3EcgR4Apr5qv5DWu9VcOog __Hx-outlook__item-icon">UNREAD_ICON_I</i>
         </div>
         <span class="_3fLh9Wjn6GR68OwcUckdM0 tZzTXpTvwdvH3pIUj1Bf2">UNREAD_TITLE_SPAN</span>
         <span class="_3rASdLVQxHgpaejCMPDNFO">

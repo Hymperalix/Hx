@@ -4,3 +4,49 @@
 .__Hx-outlook__loading-ring:after {
   border-color: #0078d4 transparent #0078d4 transparent !important;
 }
+
+.__Hx-outlook__unread-button {  /* root-### */
+  outline: transparent;
+  position: relative;
+  font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  box-sizing: border-box;
+  border: none;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  padding: 0px 4px;
+  border-radius: 2px;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  color: var(--themePrimary);
+  user-select: none;
+}
+
+.__Hx-outlook__unread-icon {  /* icon-### */
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  font-family: controlIcons;
+  font-size: 16px;
+  margin: 0px 4px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.__Hx-outlook__item-icon {  /* root-### */
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  font-family: controlIcons;
+  font-size: 16px;
+}
