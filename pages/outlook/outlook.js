@@ -2,7 +2,7 @@
 //  | VARIABLES |
 //  *-----------*
 var outlook_var = {
-  regex_check: /^https?:\/\/outlook\.live\.com\/mail\/0/,
+  regex_check: /^https?:\/\/outlook\.live\.com\/mail\/?/,
   icon: { Inbox: '', Blocked: '', Edit: '', Send: '', Clock: '', Delete: '', Archive: '', QuickNote: '', FabricFolder: '', ChevronDownMed: '', ChevronRightMed: '' },
   load: undefined, hide_ads: undefined, update_unread: undefined,
   unread_visible: true
@@ -32,32 +32,13 @@ var outlook_el = {
       </div>
     </div>
     `.trim().replace(/\n/g, ' '),
-    // body: `
-    // <div class="_24FpkalvW30l66zFUdkI8G __Hx-outlook__unread" role="tree">
-    //   <div class="_1PkXPyxM3Hhk5H6YNvwMa1 tZzTXpTvwdvH3pIUj1Bf2 _24FpkalvW30l66zFUdkI8G __Hx-outlook__unread-title" data-is-focusable="true" title="Unread" role="treeitem" aria-expanded="false" aria-level="1" aria-setsize="3" aria-posinset="1" tabindex="0" style="padding-left: 0px; padding-right: 28px;">
-    //     <button type="button" data-is-focusable="false" tabindex="-1" class="ms-Button ms-Button--icon _3Tc12ptS8HtxbTLAGzivrO _13eMs9pGc0Ag2XqdlzNGl1 root-59" role="button" aria-hidden="true">
-    //       <span class="ms-Button-flexContainer flexContainer-47" data-automationid="splitbuttonprimary">
-    //         <i data-icon-name="ChevronRightMed" aria-hidden="true" class="ms-Button-icon _3xjtFZiBm1DrWK64r3hZWK tZzTXpTvwdvH3pIUj1Bf2 _2D6wm1spPIPn1G8mum7M8h flipForRtl icon-61 __Hx-outlook__unread-icon"></i>
-    //       </span>
-    //     </button>
-    //     <span class="_3fLh9Wjn6GR68OwcUckdM0 tZzTXpTvwdvH3pIUj1Bf2 _1rX29KCSBR1YStlzdbNbZ2">Unread</span>
-    //     <span class="_3rASdLVQxHgpaejCMPDNFO">
-    //       <span class="_270bLwFzcvsBtW0L5wgZCz _2dyDdCD431x294iM624xHn _3UWhBRVAO2ks8fdt9JhiHS">
-    //         <span class="_3UWhBRVAO2ks8fdt9JhiHS __Hx-outlook__unread-counter"></span>
-    //       </span>
-    //     </span>
-    //   </div>
-    //   <div class="__Hx-outlook__unread-list" style="display: none;">
-    //   </div>
-    // </div>
-    // `.trim().replace(/\n/g, ' '),
     item: `
     <div draggable="true">
       <div class="_2f5JzhIau1fYVnCdnF6jed tZzTXpTvwdvH3pIUj1Bf2 __Hx-outlook__unread-list-item UNREAD_CLASS" data-is-focusable="true" title="UNREAD_TITLE_ATTR" path="UNREAD_PATH" role="treeitem" aria-selected="false" aria-level="2" tabindex="-1" style="padding-left: 0px; padding-right: 28px;">
         <div class="EyQ84bEUGumKAw5-dGNKI">
           <i data-icon-name="UNREAD_ICON_N" aria-hidden="true" class="_3xjtFZiBm1DrWK64r3hZWK tZzTXpTvwdvH3pIUj1Bf2 _3JuADJZrI8MDGlNxg_ila7 _3EcgR4Apr5qv5DWu9VcOog __Hx-outlook__item-icon">UNREAD_ICON_I</i>
         </div>
-        <span class="_3fLh9Wjn6GR68OwcUckdM0 tZzTXpTvwdvH3pIUj1Bf2">UNREAD_TITLE_SPAN</span>
+        <span class="_3fLh9Wjn6GR68OwcUckdM0 tZzTXpTvwdvH3pIUj1Bf2 UNREAD_CLASS">UNREAD_TITLE_SPAN</span>
         <span class="_3rASdLVQxHgpaejCMPDNFO">
           <span class="_270bLwFzcvsBtW0L5wgZCz _2dyDdCD431x294iM624xHn _3UWhBRVAO2ks8fdt9JhiHS">
             <span class="_3UWhBRVAO2ks8fdt9JhiHS">UNREAD_TOTAL</span>
@@ -67,20 +48,6 @@ var outlook_el = {
       </div>
     </div>
     `.trim().replace(/\n/g, ' ')
-    // item: `
-    // <div draggable="true">
-    //   <div class="_2f5JzhIau1fYVnCdnF6jed tZzTXpTvwdvH3pIUj1Bf2 __Hx-outlook__unread-list-item UNREAD_CLASS" data-is-focusable="true" title="UNREAD_TITLE_ATTR" path="UNREAD_PATH" role="treeitem" aria-selected="false" aria-level="2" tabindex="-1" style="padding-left: 0px; padding-right: 28px;">
-    //     <i data-icon-name="UNREAD_ICON_N" aria-hidden="true" class="_3xjtFZiBm1DrWK64r3hZWK _2D6wm1spPIPn1G8mum7M8h root-62">UNREAD_ICON_I</i>
-    //     <span class="_3fLh9Wjn6GR68OwcUckdM0 tZzTXpTvwdvH3pIUj1Bf2 _1rX29KCSBR1YStlzdbNbZ2">UNREAD_TITLE_SPAN</span>
-    //     <span class="_3rASdLVQxHgpaejCMPDNFO">
-    //       <span class="_270bLwFzcvsBtW0L5wgZCz _2dyDdCD431x294iM624xHn _3UWhBRVAO2ks8fdt9JhiHS">
-    //         <span class="_3UWhBRVAO2ks8fdt9JhiHS">UNREAD_TOTAL</span>
-    //         <span class="screenReaderOnly">unread</span>
-    //       </span>
-    //     </span>
-    //   </div>
-    // </div>
-    // `.trim().replace(/\n/g, ' ')
   }
 }
 
@@ -149,13 +116,13 @@ function loadOutlookUnreadItems () {
   var unread_total = 0
   var unread_item = ''
   $('.__Hx-outlook__unread-list').html('')
-  $.each($('._1PkXPyxM3Hhk5H6YNvwMa1.tZzTXpTvwdvH3pIUj1Bf2[title="Folders"]').parent().siblings().children().children().filter(function (i, el) { return ($(el).siblings().first().children().first().attr('data-icon-name') != 'QuickNote' && $(el).children().hasClass('_3UWhBRVAO2ks8fdt9JhiHS')) }), function( i, el ) {
-    let el_title = $(el).parent().attr('title')
-    let el_icon = $(el).siblings().first().children().first().attr('data-icon-name') || 'FabricFolder'
+  $.each($('._1PkXPyxM3Hhk5H6YNvwMa1.tZzTXpTvwdvH3pIUj1Bf2[title="Folders"]').parent().next().children().children().filter(function (i, el) { return ($(el).children().first().children().first().attr('data-icon-name') != 'QuickNote' && $(el).children().last().children().hasClass('_3UWhBRVAO2ks8fdt9JhiHS')) }), function( i, el ) {
+    let el_title = $(el).attr('title')
+    let el_icon = $(el).children().first().children().first().attr('data-icon-name') || 'FabricFolder'
     let el_icon_i = outlook_var.icon[el_icon]
-    let el_total = $(el).children().first().children().first().html()
-    let el_highlight = ($(el).parent().hasClass('_2e45YSYkafAibqL8u3c2wj') ? '_2e45YSYkafAibqL8u3c2wj' : '')
-    let el_path = getOutlookItemPath($($(el).parent()[0])) + el_title
+    let el_total = $(el).children().last().children().first().children().first().html()
+    let el_highlight = ($(el).hasClass('_2e45YSYkafAibqL8u3c2wj') ? '_2e45YSYkafAibqL8u3c2wj' : '')
+    let el_path = getOutlookItemPath($(el)) + el_title
 
     unread_item = outlook_el.unread.item
     .replace(/UNREAD_TITLE_SPAN/g, el_title)
