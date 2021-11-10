@@ -5,7 +5,8 @@ var outlook_var = {
   regex_check: /^https?:\/\/outlook\.live\.com\/mail\/?/,
   icon: { Inbox: '', Blocked: '', Edit: '', Send: '', Clock: '', Delete: '', Archive: '', QuickNote: '', FabricFolder: '', ChevronDownMed: '', ChevronRightMed: '' },
   load: undefined, hide_ads: undefined, update_unread: undefined,
-  unread_visible: true
+  unread_visible: true, unread_loaded: false,
+  items_length: 0
 }
     
 //  *----------*
@@ -54,109 +55,145 @@ var outlook_el = {
 //  *-----------*
 //  | FUNCTIONS |
 //  *-----------*
-function loadOutlook () { console.log('[loadOutlook]')
-  if ($('.__Hx__loading-body').length === 0) { console.log('[(Outlook) Add Loading]')
-    $('body').append(hx_elem.loading.replace(/PAGE/g, 'outlook'))
+function loadOutlook () { console.log('%c[loadOutlook]', 'background: #222; color: #2E8BC0;');
+  if ($('.__Hx__loading-body').length === 0) { console.log('%c[(Outlook) Add Loading]', 'background: #222; color: #2E8BC0;');
+    $('body').append(hx_elem.loading.replace(/PAGE/g, 'outlook'));
   }
-  $('.__Hx__loading-body').show()
+  $('.__Hx__loading-body').show();
 
-  hideOutlookADs()
+  hideOutlookADs();
 
-  if ($('._24FpkalvW30l66zFUdkI8G').length === 0) {
+  if (!outlook_var.unread_loaded || $('._24FpkalvW30l66zFUdkI8G').length === 0) {
     outlook_var.load = setInterval(function () {
       if ($('._24FpkalvW30l66zFUdkI8G').length > 0) {
-        clearInterval(outlook_var.load)
-        loadOutlookUnreadBody()
+        clearInterval(outlook_var.load);
+        outlook_var.unread_loaded = true
+        loadOutlookUnreadBody('(Load)');
       }
     }, 200)
   } else {
-    loadOutlookUnreadBody()
+    loadOutlookUnreadBody('(Loaded)');
   }
 
-  clearInterval(outlook_var.update_unread)
+  clearInterval(outlook_var.update_unread);
   outlook_var.update_unread = setInterval(function () {
-    loadOutlookUnreadBody()
-  }, 2000)
+    loadOutlookUnreadItems();
+  }, 1000);
 }
 
 function hideOutlookADs () {
-  clearInterval(outlook_var.hide_ads)
+  clearInterval(outlook_var.hide_ads);
   outlook_var.hide_ads = setInterval(function () {
-    if ($('._1fti_QgAzqGWPGlqh_FSvI').length > 0 && $('._28ithXDZzMqSN0YAG2rCVn').length > 0) { console.log('[(Outlook) Hide ADs]')
-      clearInterval(outlook_var.hide_ads)
-      $('._1fti_QgAzqGWPGlqh_FSvI').hide();$('._28ithXDZzMqSN0YAG2rCVn').hide()
+    if ($('._1fti_QgAzqGWPGlqh_FSvI').length > 0 && $('._28ithXDZzMqSN0YAG2rCVn').length > 0) { console.log('%c[(Outlook) Hide ADs]', 'background: #222; color: #2E8BC0;');
+      clearInterval(outlook_var.hide_ads);
+      $('._1fti_QgAzqGWPGlqh_FSvI').hide();$('._28ithXDZzMqSN0YAG2rCVn').hide();
     }
-  }, 200)
+  }, 200);
 }
 
-function loadOutlookUnreadBody () {
-  console.log('[(Outlook) Load Unread Body]')
-  $('.__Hx__loading-body').show()
+function loadOutlookUnreadBody (info) { console.log('%c[(Outlook) Load Unread Body ' + info + ']', 'background: #222; color: #2E8BC0;');
+  $('.__Hx__loading-body').show();
 
-  $('.__Hx-outlook__unread').remove()
-  $('._1PkXPyxM3Hhk5H6YNvwMa1.tZzTXpTvwdvH3pIUj1Bf2').first().parent().before(outlook_el.unread.body)
-  if (outlook_var.unread_visible) { $('.__Hx-outlook__unread-list').show() } else { $('.__Hx-outlook__unread-list').hide() }
-  $('.__Hx-outlook__unread-title').attr('aria-expanded', (outlook_var.unread_visible).toString())
-  $('.__Hx-outlook__unread-title button span i').attr('data-icon-name', outlook_var.unread_visible ? 'ChevronDownMed' : 'ChevronRightMed').html(outlook_var.unread_visible ? outlook_var.icon['ChevronDownMed'] : outlook_var.icon['ChevronRightMed'])
+  if (!$('.__Hx-outlook__unread-title').length) {
+    $('._1PkXPyxM3Hhk5H6YNvwMa1.tZzTXpTvwdvH3pIUj1Bf2').first().parent().before(outlook_el.unread.body);
+    if (outlook_var.unread_visible) { $('.__Hx-outlook__unread-list').show(); } else { $('.__Hx-outlook__unread-list').hide(); }
+    $('.__Hx-outlook__unread-title').attr('aria-expanded', (outlook_var.unread_visible).toString());
+    $('.__Hx-outlook__unread-title button span i').attr('data-icon-name', outlook_var.unread_visible ? 'ChevronDownMed' : 'ChevronRightMed').html(outlook_var.unread_visible ? outlook_var.icon['ChevronDownMed'] : outlook_var.icon['ChevronRightMed']);
 
-  $('.__Hx-outlook__unread-title').on('click', function (e) {
-    outlook_var.unread_visible = ($('.__Hx-outlook__unread-title').attr('aria-expanded') == "false" ? true : false)
-    $('.__Hx-outlook__unread-list').is(":visible") ? $('.__Hx-outlook__unread-list').hide() : $('.__Hx-outlook__unread-list').show()
-    $('.__Hx-outlook__unread-title').attr('aria-expanded', outlook_var.unread_visible)
-    $('.__Hx-outlook__unread-title button span i').attr('data-icon-name', $('.__Hx-outlook__unread-title button span i').attr('data-icon-name') == 'ChevronDownMed' ? 'ChevronRightMed' : 'ChevronDownMed').html(outlook_var.icon[$('.__Hx-outlook__unread-title button span i').attr('data-icon-name')])
-  })
-  $('.__Hx-outlook__unread-title').on("contextmenu",function(){ return false; });
+    $('.__Hx-outlook__unread-title').on('click', function (e) {
+      outlook_var.unread_visible = ($('.__Hx-outlook__unread-title').attr('aria-expanded') == "false" ? true : false);
+      $('.__Hx-outlook__unread-list').is(":visible") ? $('.__Hx-outlook__unread-list').hide() : $('.__Hx-outlook__unread-list').show();
+      $('.__Hx-outlook__unread-title').attr('aria-expanded', outlook_var.unread_visible);
+      $('.__Hx-outlook__unread-title button span i').attr('data-icon-name', $('.__Hx-outlook__unread-title button span i').attr('data-icon-name') == 'ChevronDownMed' ? 'ChevronRightMed' : 'ChevronDownMed').html(outlook_var.icon[$('.__Hx-outlook__unread-title button span i').attr('data-icon-name')]);
+    });
+    $('.__Hx-outlook__unread-title').on("contextmenu",function(){ return false; });
+  }
+  loadOutlookUnreadItems();
 
-  loadOutlookUnreadItems()
-
-  $('.__Hx__loading-body').hide()
+  $('.__Hx__loading-body').hide();
 }
 
-function loadOutlookUnreadItems () {
-  var unread_total = 0
-  var unread_item = ''
-  $('.__Hx-outlook__unread-list').html('')
-  $.each($('._1PkXPyxM3Hhk5H6YNvwMa1.tZzTXpTvwdvH3pIUj1Bf2[title="Folders"]').parent().next().children().children().filter(function (i, el) { return ($(el).children().first().children().first().attr('data-icon-name') != 'QuickNote' && $(el).children().last().children().hasClass('_3UWhBRVAO2ks8fdt9JhiHS')) }), function( i, el ) {
-    let el_title = $(el).attr('title')
-    let el_icon = $(el).children().first().children().first().attr('data-icon-name') || 'FabricFolder'
-    let el_icon_i = outlook_var.icon[el_icon]
-    let el_total = $(el).children().last().children().first().children().first().html()
-    let el_highlight = ($(el).hasClass('_2e45YSYkafAibqL8u3c2wj') ? '_2e45YSYkafAibqL8u3c2wj' : '')
-    let el_path = getOutlookItemPath($(el)) + el_title
+function loadOutlookUnreadItems() { // console.log('%c[(Outlook) Load Unread Items]', 'background: #222; color: #ffd500;');
+  var unread_total = 0;
+  var items = $('._1PkXPyxM3Hhk5H6YNvwMa1.tZzTXpTvwdvH3pIUj1Bf2[title="Folders"]').parent().next().children().children().filter(function (i, el) { return ($(el).children().first().children().first().attr('data-icon-name') != 'QuickNote') });
 
-    unread_item = outlook_el.unread.item
-    .replace(/UNREAD_TITLE_SPAN/g, el_title)
-    .replace(/UNREAD_TITLE_ATTR/g, el_path)
-    .replace(/UNREAD_ICON_N/g, el_icon)
-    .replace(/UNREAD_ICON_I/g, el_icon_i)
-    .replace(/UNREAD_TOTAL/g, el_total)
-    .replace(/UNREAD_CLASS/g, el_highlight)
-    .replace(/UNREAD_PATH/g, el_path)
-    
-    $('.__Hx-outlook__unread-list').append(unread_item)
-    $('[path="' + el_path + '"]').on('click', function (e) {
-      $(el).click()
-    })
-    unread_total += el_total !== '' ? parseInt(el_total) : 0
-  });
-  
-  $('.__Hx-outlook__unread-list-item').on("contextmenu",function(){ return false; });
-  $('.__Hx-outlook__unread-counter').html(unread_total)
+  if (outlook_var.items_length !== items.length) { // console.log('%c[(Outlook) Load Unread Items (Reload)]', 'background: #222; color: #8080ff;');
+    var unread_item = '';
+    outlook_var.items_length = items.length;
+
+    $('.__Hx-outlook__unread-list').html('');
+    $.each(items, function( i, el ) {
+      let el_title = $(el).attr('title');
+      let el_icon = $(el).children().first().children().first().attr('data-icon-name') || 'FabricFolder';
+      let el_icon_i = outlook_var.icon[el_icon];
+      let el_total = $(el).children().last().children().first().children().first().html();
+      let el_highlight = ($(el).hasClass('_2e45YSYkafAibqL8u3c2wj') ? '_2e45YSYkafAibqL8u3c2wj' : '');
+      let el_path = getOutlookItemPath($(el)) + el_title;
+
+      unread_item = outlook_el.unread.item
+      .replace(/UNREAD_TITLE_SPAN/g, el_title)
+      .replace(/UNREAD_TITLE_ATTR/g, el_path)
+      .replace(/UNREAD_ICON_N/g, el_icon)
+      .replace(/UNREAD_ICON_I/g, el_icon_i)
+      .replace(/UNREAD_TOTAL/g, el_total)
+      .replace(/UNREAD_CLASS/g, el_highlight)
+      .replace(/UNREAD_PATH/g, el_path);
+      
+      $('.__Hx-outlook__unread-list').append(unread_item);
+      $('[path="' + el_path + '"]').on('click', function (e) {
+        $(el).click();
+      })
+      unread_total += !isNaN(el_total) ? parseInt(el_total) : 0;
+
+      if ($(el).children().last().children().hasClass('_3UWhBRVAO2ks8fdt9JhiHS')) { 
+        $('[path="' + el_path + '"]').parent().show();
+      } else { 
+        $('[path="' + el_path + '"]').parent().hide();
+      }
+    });
+
+    $('.__Hx-outlook__unread-list-item').on("contextmenu",function(){ return false; });
+    $('.__Hx-outlook__unread-counter').html(unread_total);
+  } else {  // console.log('%c[(Outlook) Load Unread Items (Update)]', 'background: #222; color: #00cc00;');
+    $.each(items, function( i, el ) {
+      let el_title = $(el).attr('title');
+      let el_total = $(el).children().last().children().first().children().first().html();
+      let el_path = getOutlookItemPath($(el)) + el_title;
+
+      if ($(el).hasClass('_2e45YSYkafAibqL8u3c2wj')) {
+        if (!$('[path="' + el_path + '"]').hasClass('_2e45YSYkafAibqL8u3c2wj')) {
+          $('[path="' + el_path + '"]').addClass('_2e45YSYkafAibqL8u3c2wj');
+        }
+      } else {
+        $('[path="' + el_path + '"]').removeClass('_2e45YSYkafAibqL8u3c2wj');
+      }
+
+      $('[path="' + el_path + '"]').children().last().children().first().children().first().html(el_total);
+      unread_total += !isNaN(el_total) ? parseInt(el_total) : 0;
+
+      if ($(el).children().last().children().hasClass('_3UWhBRVAO2ks8fdt9JhiHS')) { 
+        $('[path="' + el_path + '"]').parent().show();
+      } else { 
+        $('[path="' + el_path + '"]').parent().hide();
+      }
+    });
+    $('.__Hx-outlook__unread-counter').html(unread_total);
+  }
 }
 
 function getOutlookItemPath (el) {
-  var title = ''
-  var aria_level = parseInt(el.attr('aria-level'))
-  var prev_el = el.parent().prev().children().first()  
+  var title = '';
+  var aria_level = parseInt(el.attr('aria-level'));
+  var prev_el = el.parent().prev().children().first(); 
   while (aria_level > 2) {
     if (parseInt(prev_el.attr('aria-level')) < aria_level) {
-      title = prev_el.attr('title') + ' > ' + title
-      aria_level--
+      title = prev_el.attr('title') + ' > ' + title;
+      aria_level--;
     } else {
-      prev_el = prev_el.parent().prev().children().first()
+      prev_el = prev_el.parent().prev().children().first();
     }
   }
-  return title
+  return title;
 }
 
 //  *---------*
@@ -164,7 +201,7 @@ function getOutlookItemPath (el) {
 //  *---------*
 chrome.runtime.onMessage.addListener(function(msg) {
   if (msg === 'page-rendered') {
-    if (outlook_var.regex_check.test(document.location.href)) { console.log('[(Outlook) page-rendered]')
+    if (outlook_var.regex_check.test(document.location.href)) { console.log('%c[(Outlook) page-rendered]', 'background: #222; color: #bada55;');
       loadOutlook()
     }
   }
