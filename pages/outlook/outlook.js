@@ -78,7 +78,7 @@ function loadOutlook () { console.log('%c[loadOutlook]', 'background: #222; colo
   clearInterval(outlook_var.update_unread);
   outlook_var.update_unread = setInterval(function () {
     loadOutlookUnreadItems();
-  }, 1000);
+  }, 2000);
 }
 
 function hideOutlookADs () {
