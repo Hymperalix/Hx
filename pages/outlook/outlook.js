@@ -63,7 +63,8 @@ function loadOutlook () { console.log('%c[loadOutlook]', 'background: #222; colo
 
   hideOutlookADs();
 
-  if (!outlook_var.unread_loaded || $('._24FpkalvW30l66zFUdkI8G').length === 0) {
+  if (!outlook_var.unread_loaded) {
+    clearInterval(outlook_var.load);
     outlook_var.load = setInterval(function () {
       if ($('._24FpkalvW30l66zFUdkI8G').length > 0) {
         clearInterval(outlook_var.load);
@@ -106,7 +107,7 @@ function loadOutlookUnreadBody (info) { console.log('%c[(Outlook) Load Unread Bo
       $('.__Hx-outlook__unread-title').attr('aria-expanded', outlook_var.unread_visible);
       $('.__Hx-outlook__unread-title button span i').attr('data-icon-name', $('.__Hx-outlook__unread-title button span i').attr('data-icon-name') == 'ChevronDownMed' ? 'ChevronRightMed' : 'ChevronDownMed').html(outlook_var.icon[$('.__Hx-outlook__unread-title button span i').attr('data-icon-name')]);
     });
-    $('.__Hx-outlook__unread-title').on("contextmenu",function(){ return false; });
+    $('.__Hx-outlook__unread-title').on("contextmenu", function() { return false; });
   }
   loadOutlookUnreadItems();
 
@@ -152,8 +153,7 @@ function loadOutlookUnreadItems() { // console.log('%c[(Outlook) Load Unread Ite
       }
     });
 
-    $('.__Hx-outlook__unread-list-item').on("contextmenu",function(){ return false; });
-    $('.__Hx-outlook__unread-counter').html(unread_total);
+    $('.__Hx-outlook__unread-list-item').on("contextmenu", function() { return false; });
   } else {  // console.log('%c[(Outlook) Load Unread Items (Update)]', 'background: #222; color: #00cc00;');
     $.each(items, function( i, el ) {
       let el_title = $(el).attr('title');
@@ -177,8 +177,8 @@ function loadOutlookUnreadItems() { // console.log('%c[(Outlook) Load Unread Ite
         $('[path="' + el_path + '"]').parent().hide();
       }
     });
-    $('.__Hx-outlook__unread-counter').html(unread_total);
   }
+  $('.__Hx-outlook__unread-counter').html(unread_total);
 }
 
 function getOutlookItemPath (el) {
