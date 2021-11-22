@@ -143,12 +143,12 @@ function loadOutlookUnreadItems() { // console.log('%c[(Outlook) Load Unread Ite
       $('.__Hx-outlook__unread-list').append(unread_item);
       $('[path="' + el_path + '"]').on('click', function (e) {
         $(el).click();
-      })
+      });
       unread_total += !isNaN(el_total) ? parseInt(el_total) : 0;
 
-      if ($(el).children().last().children().hasClass('_3UWhBRVAO2ks8fdt9JhiHS')) { 
+      if ($(el).children().last().children().hasClass('_3UWhBRVAO2ks8fdt9JhiHS')) {
         $('[path="' + el_path + '"]').parent().show();
-      } else { 
+      } else {
         $('[path="' + el_path + '"]').parent().hide();
       }
     });
@@ -171,7 +171,7 @@ function loadOutlookUnreadItems() { // console.log('%c[(Outlook) Load Unread Ite
       $('[path="' + el_path + '"]').children().last().children().first().children().first().html(el_total);
       unread_total += !isNaN(el_total) ? parseInt(el_total) : 0;
 
-      if ($(el).children().last().children().hasClass('_3UWhBRVAO2ks8fdt9JhiHS')) { 
+      if ($(el).children().last().children().hasClass('_3UWhBRVAO2ks8fdt9JhiHS')) {
         $('[path="' + el_path + '"]').parent().show();
       } else { 
         $('[path="' + el_path + '"]').parent().hide();

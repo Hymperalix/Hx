@@ -17,6 +17,7 @@ function loadTwitch () { console.log('[loadTwitch]')
 		}
 	}, 1000)
 
+  clearInterval(twitch_var.prime);
   twitch_var.prime = setInterval(function () {
     if (!!$('.top-nav__prime')) {
       clearInterval(twitch_var.prime)
